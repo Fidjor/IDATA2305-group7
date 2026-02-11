@@ -1,26 +1,31 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
+import java.io.*;
 import java.net.Socket;
 
 public class Client {
-  public static void main(String[] args) {
+
+  private int port;
+  private BufferedReader in;
+  private PrintWriter out;
+  private Socket socket;
+
+  public Client(int port) {
+
     String host = "localhost";
-    int port = 8080;
+    this.port = port;
 
-    try(Socket socket = new Socket(host, port);
-      BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-      PrintWriter out = new PrintWriter(socket.getOutputStream(), true)) {
+    try {
 
-      out.println("PING");
-      System.out.println("Sent: PING");
+      socket = new Socket(host, port);
 
-      String response = in.readLine();
-      System.out.println("Received: " + response);
+      in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+      out = new PrintWriter(socket.getOutputStream(), true);
 
     } catch (IOException e) {
       e.printStackTrace();
     }
+  }
+
+  public void sendMessage(String message) {
+    out.println(message);
   }
 }
