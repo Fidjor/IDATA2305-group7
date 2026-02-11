@@ -25,7 +25,7 @@ public class Client {
     }
   }
 
-  public void sendMessage(String message) {
-    out.println(message);
+  public void sendMessage(double number1, double number2, char operator) {
+    out.println(number1+","+number2+","+operator);
   }
 }
