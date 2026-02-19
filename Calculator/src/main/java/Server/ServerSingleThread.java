@@ -31,7 +31,7 @@ public class ServerSingleThread {
           double number1 = Double.parseDouble(lineSplit[0]);
           double number2 = Double.parseDouble(lineSplit[1]);
           char operator =  lineSplit[2].charAt(0);
-          System.out.println(calculate(number1,number2,operator));
+          out.println(calculate(number1,number2,operator));
         }
       }
 
