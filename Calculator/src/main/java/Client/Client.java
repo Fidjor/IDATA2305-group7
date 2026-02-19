@@ -27,7 +27,19 @@ public class Client {
     }
   }
 
-  public void sendMessage(double number1, double number2, char operator) {
+  public String sendMessage(double number1, double number2, char operator) {
     out.println(number1+","+number2+","+operator);
+
+    try {
+      String response = in.readLine();
+      return response;
+    } catch (IOException e) {
+      e.printStackTrace();
+      return null;
+    } finally {
+      try {
+        if (socket != null && !socket.isClosed()) socket.close();
+      } catch (IOException ignored) {}
+    }
   }
 }
