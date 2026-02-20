@@ -8,6 +8,7 @@ import java.net.Socket;
 
 public class ClientHandler implements Runnable {
   private final Socket clientSocket;
+  private final boolean addSleepTime = false;
   public ClientHandler(Socket socket) {
     this.clientSocket = socket;
   }
@@ -27,7 +28,9 @@ public class ClientHandler implements Runnable {
       double number2 = Double.parseDouble(lineSplit[1]);
       char operator =  lineSplit[2].charAt(0);
       double answer = calculate(number1,number2,operator);
-      Thread.sleep(2000);
+      if (addSleepTime) {
+        Thread.sleep(2000);
+      }
       out.println(answer);
     } catch (IOException | InterruptedException e) {
       throw new RuntimeException(e);
