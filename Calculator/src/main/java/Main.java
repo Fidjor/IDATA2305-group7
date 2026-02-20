@@ -8,8 +8,8 @@ public class Main {
 
     for (int i = 0; i < 10; i++) {
       threads[i] = new Thread(() -> {
-        Client c = new Client(8080);
-        c.sendMessage(2, 2, '+');
+        Client client = new Client(8080);
+        client.sendMessage(2, 2, '+');
       });
       threads[i].start();
     }
