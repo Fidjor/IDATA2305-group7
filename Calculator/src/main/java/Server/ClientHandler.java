@@ -14,8 +14,8 @@ public class ClientHandler implements Runnable {
 
   @Override
   public void run() {
-    PrintWriter out = null;
-    BufferedReader in = null;
+    PrintWriter out;
+    BufferedReader in;
     try {
       out = new PrintWriter(clientSocket.getOutputStream(), true);
       in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
@@ -27,8 +27,9 @@ public class ClientHandler implements Runnable {
       double number2 = Double.parseDouble(lineSplit[1]);
       char operator =  lineSplit[2].charAt(0);
       double answer = calculate(number1,number2,operator);
+      Thread.sleep(2000);
       out.println(answer);
-    } catch (IOException e) {
+    } catch (IOException | InterruptedException e) {
       throw new RuntimeException(e);
     }
   }

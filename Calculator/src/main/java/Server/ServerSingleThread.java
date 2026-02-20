@@ -19,19 +19,13 @@ public class ServerSingleThread {
 
       running = true;
       while (running) {
-        try (Socket clientSocket = serverSocket.accept();
-             BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-             PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true)) {
+        try (Socket clientSocket = serverSocket.accept()) {
 
           System.out.println("Client connected: " + clientSocket.getRemoteSocketAddress());
 
-          String line = in.readLine();
-          System.out.println("Recieved: " + line);
-          String[] lineSplit = line.split(",");
-          double number1 = Double.parseDouble(lineSplit[0]);
-          double number2 = Double.parseDouble(lineSplit[1]);
-          char operator =  lineSplit[2].charAt(0);
-          out.println(calculate(number1,number2,operator));
+          ClientHandler clientHandler = new ClientHandler(clientSocket);
+          clientHandler.run();
+
         }
       }
 
@@ -39,15 +33,5 @@ public class ServerSingleThread {
     } catch (IOException e) {
       throw new RuntimeException(e);
     }
-  }
-
-  public static double calculate(double number1, double number2, char operator) {
-    return switch (operator) {
-      case '+' -> number1 + number2;
-      case '-' -> number1 - number2;
-      case '*' -> number1 * number2;
-      case '/' -> number1 / number2;
-      default -> throw new IllegalArgumentException("Unknown operator: " + operator);
-    };
   }
 }
