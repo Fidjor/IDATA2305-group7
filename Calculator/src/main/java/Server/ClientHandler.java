@@ -22,7 +22,7 @@ public class ClientHandler implements Runnable {
       in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
 
       String line = in.readLine();
-      System.out.println("Recieved: " + line);
+      System.out.println("Received: " + line);
       String[] lineSplit = line.split(",");
       double number1 = Double.parseDouble(lineSplit[0]);
       double number2 = Double.parseDouble(lineSplit[1]);
