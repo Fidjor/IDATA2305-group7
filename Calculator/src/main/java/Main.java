@@ -25,7 +25,7 @@ public class Main {
       averageDuration += duration;
     }
 
-    System.out.println(averageDuration + "ms");
+    System.out.println(averageDuration/timesToRun + "ms");
 
   }
 }
