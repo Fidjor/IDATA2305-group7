@@ -22,6 +22,7 @@ public class Main {
         thread.join();
       }
       long duration = (System.nanoTime() - startTime)/1000000;
+      System.out.println(duration);
       averageDuration += duration;
     }
 
